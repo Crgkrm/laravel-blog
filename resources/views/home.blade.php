@@ -1,5 +1,6 @@
 
-<x-app-layout>
+<x-app-layout meta-title="TheCodeholic Blog"
+              meta-description="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
 <section class="w-full md:w-2/3 flex flex-col items-center px-3">
    @foreach($posts as $post)
    <x-post-item :post="$post"></x-post-item>

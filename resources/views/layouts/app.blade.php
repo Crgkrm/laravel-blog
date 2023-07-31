@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    @livewireStyles 
 </head>
 <body class="bg-gray 50 font-family-karla">
 
@@ -74,31 +75,44 @@
             </a>
         </div>
         <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
-            <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
+            <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-between text-sm font-bold uppercase mt-0 px-6 py-2">
+                <div>
                 <a href="{{route('home')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Home</a>
                 @foreach($categories as $category)
                 <a href="{{route('by-category',$category)}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : ''}}">{{$category->title}}</a>
                 @endforeach
                 <a href="{{route('about-us')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">About us </a>
-            </div>
+                </div>
+                <div>
+                @auth
+                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                    <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                                </x-dropdown-link>
+                                </form>
+                        @else
+                 <a href="{{route('login')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Login</a>
+                <a href="{{route('register')}}" class="bg-blue-400 rounded py-2 px-4 mx-2">Register</a>
+                @endauth
+             
+             </div>
         </div>
     </nav>
- <div class="container mx-auto flex flex-wrap py-6">
-      {{$slot}}
+ <div class="w-full  justify-center justify-container mx-auto flex flex-wrap py-6">
+      
+     {{ $slot }}
         <!-- Posts Section -->
-
+                                                                          
         <!-- Sidebar Section -->
-        <x-sidebar/>
-       
-
-    </div>
+       </div>
      <footer class="w-full border-t bg-white pb-12">
          <div class="uppercase text-center">&copy; laravel.com</div>
         </div>
     </footer>
-
-    <script>
-    </script>
-
+</script>
+@livewireScripts
 </body>
 </html>

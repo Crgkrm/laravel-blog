@@ -27,8 +27,11 @@
                        {{$post->shortBody()}}
                         </a>
                       </div>
+                      <livewire:upvote-downvote:post="$post"/>
                     <div>
+                    
                  </div>
+               
                 </div>
             </article>
 
@@ -60,6 +63,8 @@
                             <p class="pt-2">{{\Illuminate\Support\Str::words($next->title)}}</p>
                         </a>
                    </div>
-            </div>
+                  
+              </div>
         </section>
+        <x-sidebar/>
 </x-app-layout>
