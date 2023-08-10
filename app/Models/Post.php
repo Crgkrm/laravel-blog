@@ -38,8 +38,8 @@ public function user(){
   
     
 }
- public function shortBody(){
-    return Str::words(strip_tags($this->body),30);
+ public function shortBody($words=30){
+    return Str::words(strip_tags($this->body),$words);
 }
 
  public function getFormateddate(){
@@ -51,6 +51,11 @@ public function getThumbnails(){
         return $this->thumbnails;
     }
     return '/storage/'.$this->thumbnails;
+}
+//this method will return custome Attribute from laravel eloquent cast/
+public function humanReadTime():Attribute
+{
+   
 }
 
 }
